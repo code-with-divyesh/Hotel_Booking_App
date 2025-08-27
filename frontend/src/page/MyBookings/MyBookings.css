@@ -1,0 +1,149 @@
+.myBooking-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 7rem;
+  padding-left: 9rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.header-row {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  border-bottom: 1px solid #d1d5db;
+  width: 100%;
+  font-weight: 500;
+  font-size: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.booking-row {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  width: 100%;
+}
+.hotel-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.hotel-img {
+  width: 200px;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.hotel-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.hotel-name {
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.room-type {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.hotel-location,
+.guests {
+  font-size: 0.85rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.hotel-location img,
+.guests img {
+  width: 14px;
+  height: 14px;
+}
+
+.total-price {
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+.date-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3rem;
+}
+.date-label {
+  font-weight: 500;
+  color: #000;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.payment-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12px;
+  font-family: sans-serif;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.status-dot.paid {
+  background-color: #22c55e;
+}
+
+.status-dot.unpaid {
+  background-color: #ef4444;
+}
+
+.status-text {
+  font-size: 14px;
+}
+
+.status-text.paid {
+  color: #22c55e;
+}
+
+.status-text.unpaid {
+  color: #ef4444;
+}
+
+.pay-now-btn {
+  margin-top: 8px;
+  padding: 4px 16px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 9999px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.pay-now-btn:hover {
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+  .header-row {
+    display: none;
+  }
+}

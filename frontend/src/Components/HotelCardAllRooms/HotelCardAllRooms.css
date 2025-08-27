@@ -1,0 +1,194 @@
+/* Wrapper for the whole card block */
+.hotel-card {
+  padding: 36px 0;
+  border-bottom: 1px solid #e6e9ee;
+}
+
+/* Make the Link a horizontal row on desktop */
+.des-card {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* IMAGE COLUMN */
+.hc-img-wrap {
+  flex: 0 0 420px; /* fixed visual width on desktop */
+  max-width: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.06);
+  background: #fff;
+}
+.hc-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 280px; /* control image height */
+  object-fit: cover; /* maintain aspect ratio and fill area */
+}
+
+/* Right column content */
+.card-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* allow text truncation if needed */
+}
+
+/* City small text above title */
+.hotel-city {
+  margin: 6px 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Title */
+.hotel-title {
+  margin: 0 0 12px 0;
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  color: #0f1724;
+  line-height: 1.05;
+}
+
+/* Rating */
+.hc-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.hc-rating .reviews {
+  color: #374151;
+  font-size: 14px;
+}
+.hc-rating img,
+.hc-rating svg {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+/* Location row */
+.hotel-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.hotel-location img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Amenities pills */
+.amenities {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.amenity-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #f4f5fb; /* pale */
+  font-size: 13px;
+  color: #374151;
+}
+.amenity-pill img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Price and book (bottom) */
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 8px;
+  
+}
+.price span {
+  font-weight: 400;
+  color: #6b7280;
+  margin-left: 6px;
+}
+
+/* Tag (optional) - if you later add Best Seller as absolute element */
+.hc-img-wrap .tag {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  background: #ff6b2d;
+  padding: 6px 10px;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 12px;
+  z-index: 5;
+}
+
+.des-card:focus {
+  outline: none;
+}
+/* Tablet view */
+@media (max-width: 1024px) {
+  .des-card {
+    gap: 20px;
+  }
+  .hc-img-wrap {
+    flex: none;
+    max-width: 100%;
+  }
+  .hc-img-wrap img {
+    width: 100%;
+    height: auto; /* image ka aspect ratio maintain karega */
+  }
+  .hotel-title {
+    font-size: 26px;
+  }
+  .price {
+    font-size: 18px;
+  }
+}
+/* Mobile view */
+@media (max-width: 768px) {
+  .des-card {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hc-img-wrap {
+    flex: none;
+    max-width: 100%;
+  }
+  .hc-img-wrap img {
+    width: 100%;
+    height: auto; /* yaha bhi fixed height hatadi */
+  }
+  .card-content {
+    flex: none;
+  }
+  .hotel-title {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .hotel-city {
+    font-size: 12px;
+  }
+  .hc-rating .reviews,
+  .hotel-location,
+  .amenity-pill {
+    font-size: 12px;
+  }
+  .price {
+    flex-direction: row;
+    font-size: 16px;
+  }
+}

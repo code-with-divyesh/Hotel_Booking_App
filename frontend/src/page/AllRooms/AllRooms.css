@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 7rem;
+  padding-left: 9rem;
+  padding-right: 1rem;
+  gap: 2rem;
+}
+
+.room-left {
+  flex: 3;
+}
+
+.room-right {
+  flex: 1;
+}
+
+/* By default, mobile filters hidden */
+.filters-mobile {
+  display: none;
+}
+
+/* Desktop filters visible */
+.filters-desktop {
+  display: block;
+}
+
+/* Tablet tweaks */
+@media (max-width: 1024px) {
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .room-left,
+  .room-right {
+    width: 100%;
+    flex: none;
+  }
+
+  /* Show mobile filters, hide desktop filters */
+  .filters-mobile {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .filters-desktop {
+    display: none;
+  }
+
+  /* room-right ko hide karna bhi safe hai */
+  .room-right {
+    display: none;
+  }
+}

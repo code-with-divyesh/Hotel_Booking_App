@@ -1,0 +1,110 @@
+.offer-container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.offer-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 2rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 193px;
+  height: 48px;
+}
+.offer-btn:hover {
+  background-color: #0056b3;
+}
+.offer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.offer-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 4rem 1rem 1.5rem;
+  border-radius: 1rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  min-height: 280px;
+}
+.offer-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: white;
+  color: #1e293b; /* gray-800 */
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+.offer-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 0.25rem;
+}
+.offer-expiry {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.75rem;
+}
+.offer-card .offer-btn {
+  background: none;
+}
+.offer-btn img {
+  filter: invert(1);
+}
+@media (max-width: 1024px) {
+  .offer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .offer-container {
+    padding: 30px 15px;
+  }
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+  .offer-grid {
+    grid-template-columns: 1fr;
+  }
+  .offer-card {
+    margin: 0 0.5rem;
+  }
+  .offer-container {
+    padding: 20px 10px;
+  }
+  .offer-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .offer-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+  }
+}

@@ -1,0 +1,18 @@
+/* Layout.css */
+.owner-container {
+  display: flex;
+  flex-direction: column; /* Top Nav + Below Content */
+  height: 100vh;
+}
+
+.owner-hero-section {
+  flex: 1; /* NavBar ke niche ka space le */
+  display: flex;
+  overflow: hidden; /* Extra scroll issue avoid */
+}
+
+.owner-main-section {
+  flex: 1; /* Sidebar ke bagal ka space */
+  padding: 20px;
+  overflow-y: auto; /* Right content scrollable ho sake */
+}

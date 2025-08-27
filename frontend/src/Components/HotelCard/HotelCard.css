@@ -1,0 +1,77 @@
+.destination-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  max-width: 320px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.destination-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.tag {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 0.6rem;
+  color: white;
+  background-color: #ff6b6b;
+  border-radius: 31px;
+  padding: 6px 14px;
+}
+.card-body {
+  padding: 1rem;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hotel-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  gap: 0.3rem;
+}
+.rating img {
+  height: 20px;
+}
+.hotel-location {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  color: #777;
+}
+.hotel-location img {
+  width: 16px;
+  height: 16px; /* ADD THIS */
+  margin-right: 0.5rem;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  font-weight: bold;
+  color: #333;
+}
+.book-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}

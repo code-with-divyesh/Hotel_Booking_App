@@ -1,0 +1,179 @@
+.stats-container {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stats-card {
+  background-color: rgba(37, 99, 235, 0.03);
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem 1rem 1rem;
+}
+
+.stats-icon {
+  height: 2.5rem;
+}
+
+.stats-text {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.stats-label {
+  color: #3a7cff;
+  font-size: 1.125rem;
+}
+
+.stats-value {
+  color: #a3a3a3;
+  font-size: 1rem;
+}
+.recent-bookings-title {
+  font-size: 1.25rem;
+  color: rgba(23, 37, 84, 0.7);
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+.recent-bookings-table {
+  width: 100%;
+  max-width: 48rem;
+  text-align: left;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  max-height: 20rem;
+  overflow-y: scroll;
+}
+
+.recent-bookings-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-bookings-table thead {
+  background-color: #f9fafb;
+}
+
+.recent-bookings-table th {
+  padding: 0.75rem 1rem;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.recent-bookings-table .total-amount,
+.recent-bookings-table .payment-status {
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .recent-bookings-table .room-name {
+    display: none;
+  }
+}
+
+.recent-bookings-table tbody {
+  font-size: 0.875rem;
+}
+.username {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #1f2937;
+  font-weight: 500;
+}
+.room-name {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+total-amount {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #111827;
+  font-weight: 500;
+}
+.payment-status {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+}
+
+.payment-status.paid {
+  color: #16a34a;
+}
+
+.payment-status.pending {
+  color: #f59e0b;
+}
+
+.payment-status.cancelled {
+  color: #dc2626;
+}
+/* 📊 Stats Cards Responsive */
+@media (max-width: 1024px) {
+  /* Tablet */
+  .stats-container {
+    flex-wrap: wrap; /* Wrap cards in multiple rows */
+  }
+  .stats-card {
+    flex: 1 1 calc(50% - 1rem); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 640px) {
+  /* Mobile */
+  .stats-container {
+    flex-direction: column; /* Single column */
+  }
+  .stats-card {
+    width: 100%;
+  }
+}
+
+/* 📋 Recent Bookings Table Responsive */
+@media (max-width: 640px) {
+  /* Hide some columns */
+  .recent-bookings-table .room-name {
+    display: none;
+  }
+
+  /* Make table display as cards */
+  .recent-bookings-table thead {
+    display: none;
+  }
+
+  .recent-bookings-table table,
+  .recent-bookings-table tbody,
+  .recent-bookings-table tr,
+  .recent-bookings-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .recent-bookings-table tr {
+    margin-bottom: 1rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5rem;
+  }
+
+  .recent-bookings-table td {
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  /* Show label before value */
+  .recent-bookings-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    color: #555;
+  }
+}

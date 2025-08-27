@@ -1,0 +1,144 @@
+.hotel-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.hotel-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.hotel-table th,
+.hotel-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.hotel-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #555;
+}
+
+.hotel-table tbody tr {
+  border-top: 1px solid #e5e5e5;
+}
+
+.hotel-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.actions-cell {
+  text-align: center;
+}
+
+/* Toggle styling */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #2563eb; /* blue */
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.slider.round {
+  border-radius: 22px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/* 📱 Tablet Responsive */
+@media (max-width: 1024px) {
+  .hotel-table th,
+  .hotel-table td {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 640px) {
+  .hotel-text {
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
+  }
+
+  /* Table ko horizontal scroll dena */
+  .hotel-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 0;
+  }
+
+  .hotel-table table {
+    min-width: 500px; /* Taaki scroll ho sake */
+  }
+
+  .hotel-table th,
+  .hotel-table td {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  /* Toggle switch thoda chhota */
+  .switch {
+    width: 36px;
+    height: 18px;
+  }
+
+  .slider:before {
+    height: 14px;
+    width: 14px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(18px);
+  }
+}
