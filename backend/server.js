@@ -8,23 +8,26 @@ import clerkWebHooks from "./Controller/ClearkWebHooks.js";
 const app = express();
 app.use(cors());
 
-// Clerk webhook route (raw body required)
+// ✅ Clerk webhook (raw body) pehle
 app.post(
   "/api/clerk",
   express.raw({ type: "application/json" }),
   clerkWebHooks
 );
 
-// All other routes
+// ✅ Baaki sab ke liye json body parser
 app.use(express.json());
 app.use(clerkMiddleware());
 
-app.get("/", (req, res) => {
-  res.send("API is Working ✅");
+// ✅ Root route
+app.get("/", async (req, res) => {
+  try {
+    await connectDB(); // lazy connect
+    res.send("API is Working ✅ with MongoDB");
+  } catch (err) {
+    res.status(500).send("DB connection failed ❌: " + err.message);
+  }
 });
 
-// ⚡ Vercel fix: remove app.listen
-connectDB();
-
-// ✅ Instead of app.listen, export the handler
+// ⚡ Vercel me app.listen nahi, sirf export
 export default app;
