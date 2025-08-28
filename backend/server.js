@@ -5,27 +5,29 @@ import connectDB from "./Config/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkWebHooks from "./Controller/ClearkWebHooks.js";
 
-connectDB();
-
 const app = express();
 app.use(cors());
 
-// Clerk webhook route (raw body required)
+// Clerk webhook (⚡ keep raw body here)
 app.post(
   "/api/clerk",
   express.raw({ type: "application/json" }),
   clerkWebHooks
 );
 
-// All other routes
+// All other routes (JSON parser applied after webhook)
 app.use(express.json());
 app.use(clerkMiddleware());
 
 app.get("/", (req, res) => {
-  res.send("API is Working");
+  res.send("✅ API is Working");
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+
+// Start server only after DB connect
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+  });
 });
