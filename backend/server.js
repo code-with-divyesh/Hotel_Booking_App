@@ -10,16 +10,10 @@ connectDB();
 const app = express();
 app.use(cors());
 
-// Clerk requires raw body for webhooks verification
-app.post(
-  "/api/clerk",
-  express.raw({ type: "application/json" }), // raw body only for webhook
-  clerkWebHooks
-);
-
-// All other routes can use JSON parsing
 app.use(express.json());
 app.use(clerkMiddleware());
+
+app.use("/api/clerk", clerkWebHooks);
 
 app.get("/", (req, res) => {
   res.send("API is Working");
