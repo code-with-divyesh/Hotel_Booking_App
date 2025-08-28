@@ -8,26 +8,23 @@ import clerkWebHooks from "./Controller/ClearkWebHooks.js";
 const app = express();
 app.use(cors());
 
-// Clerk webhook (⚡ keep raw body here)
+// Clerk webhook route (raw body required)
 app.post(
   "/api/clerk",
   express.raw({ type: "application/json" }),
   clerkWebHooks
 );
 
-// All other routes (JSON parser applied after webhook)
+// All other routes
 app.use(express.json());
 app.use(clerkMiddleware());
 
 app.get("/", (req, res) => {
-  res.send("✅ API is Working");
+  res.send("API is Working ✅");
 });
 
-const PORT = process.env.PORT || 3000;
+// ⚡ Vercel fix: remove app.listen
+connectDB();
 
-// Start server only after DB connect
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
-});
+// ✅ Instead of app.listen, export the handler
+export default app;
