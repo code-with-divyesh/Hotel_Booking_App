@@ -10,10 +10,24 @@ connectDB();
 const app = express();
 app.use(cors());
 
-app.use(express.json());
+// Clerk middleware sabse pehle
 app.use(clerkMiddleware());
 
-app.use("/api/clerk", clerkWebHooks);
+// JSON parser (webhook ke alawa sab ke liye)
+app.use((req, res, next) => {
+  if (req.originalUrl === "/api/clerk") {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
+
+// Webhook route (raw body required)
+app.post(
+  "/api/clerk",
+  express.raw({ type: "application/json" }),
+  clerkWebHooks
+);
 
 app.get("/", (req, res) => {
   res.send("API is Working");
