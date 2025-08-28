@@ -4,6 +4,8 @@ import cors from "cors";
 import connectDB from "./Config/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkWebHooks from "./Controller/ClearkWebHooks.js";
+import userRouter from "./Routes/userRoute.js";
+import { protect } from "./Middleware/authMiddleware.js";
 
 connectDB();
 
@@ -28,7 +30,7 @@ app.post(
   express.raw({ type: "application/json" }),
   clerkWebHooks
 );
-
+app.use("/api/user", protect, userRouter);
 app.get("/", (req, res) => {
   res.send("API is Working");
 });
