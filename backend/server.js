@@ -5,29 +5,27 @@ import connectDB from "./Config/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkWebHooks from "./Controller/ClearkWebHooks.js";
 
+connectDB();
+
 const app = express();
 app.use(cors());
 
-// Clerk webhook route (raw body required)
+// Clerk requires raw body for webhooks verification
 app.post(
   "/api/clerk",
-  express.raw({ type: "application/json" }),
+  express.raw({ type: "application/json" }), // raw body only for webhook
   clerkWebHooks
 );
 
-// All other routes
+// All other routes can use JSON parsing
 app.use(express.json());
 app.use(clerkMiddleware());
 
-// Root route
-app.get("/", async (req, res) => {
-  try {
-    await connectDB(); // serverless me har request par ensure karo DB connect ho
-    res.send("✅ API is Working with Vercel + MongoDB");
-  } catch (err) {
-    res.status(500).send("❌ DB connection failed: " + err.message);
-  }
+app.get("/", (req, res) => {
+  res.send("API is Working");
 });
 
-// 👇 ye line important hai serverless ke liye
-export default app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
