@@ -5,7 +5,6 @@ const clerkWebHooks = async (req, res) => {
   try {
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
-    // raw Buffer directly pass karo
     const payload = req.body;
     const headers = {
       "svix-id": req.headers["svix-id"],
@@ -13,11 +12,11 @@ const clerkWebHooks = async (req, res) => {
       "svix-signature": req.headers["svix-signature"],
     };
 
-    // verify event
     const evt = whook.verify(payload, headers);
     const { data, type } = evt;
 
-    console.log("✅ Clerk Event:", type);
+    console.log("✅ Clerk Event Type:", type);
+    console.log("📩 Clerk Event Data:", JSON.stringify(data, null, 2));
 
     // construct user data
     const userData = {
@@ -27,10 +26,9 @@ const clerkWebHooks = async (req, res) => {
       image: data.image_url,
     };
 
-    // 🔹 Send response early to avoid retries
+    // send response early
     res.status(200).json({ success: true });
 
-    // 🔹 Handle events asynchronously (safe from retries)
     switch (type) {
       case "user.created":
         await User.findByIdAndUpdate(data.id, userData, { upsert: true });
@@ -45,7 +43,7 @@ const clerkWebHooks = async (req, res) => {
         await User.findByIdAndDelete(data.id);
         break;
       default:
-        console.log("Unhandled webhook type:", type);
+        console.log("⚠️ Unhandled webhook type:", type);
     }
   } catch (error) {
     console.error("❌ Webhook error:", error.message);
