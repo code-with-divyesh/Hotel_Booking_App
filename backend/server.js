@@ -7,8 +7,11 @@ import clerkWebHooks from "./Controller/ClearkWebHooks.js";
 import userRouter from "./Routes/userRoute.js";
 import { protect } from "./Middleware/authMiddleware.js";
 import hotelRouter from "./Routes/hotelRoute.js";
+import connectCloudinary from "./Config/cloudinary.js";
+import roomRouter from "./Routes/roomRouter.js";
 
 connectDB();
+connectCloudinary();
 
 const app = express();
 app.use(cors());
@@ -32,7 +35,8 @@ app.post(
   clerkWebHooks
 );
 app.use("/api/user", protect, userRouter);
-app.use("api/hotels",hotelRouter);
+app.use("api/hotels", hotelRouter);
+app.use("api/rooms", roomRouter);
 app.get("/", (req, res) => {
   res.send("API is Working");
 });
