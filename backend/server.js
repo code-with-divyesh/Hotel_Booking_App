@@ -6,6 +6,7 @@ import { clerkMiddleware } from "@clerk/express";
 import clerkWebHooks from "./Controller/ClearkWebHooks.js";
 import userRouter from "./Routes/userRoute.js";
 import { protect } from "./Middleware/authMiddleware.js";
+import hotelRouter from "./Routes/hotelRoute.js";
 
 connectDB();
 
@@ -31,6 +32,7 @@ app.post(
   clerkWebHooks
 );
 app.use("/api/user", protect, userRouter);
+app.use("api/hotels",hotelRouter);
 app.get("/", (req, res) => {
   res.send("API is Working");
 });
