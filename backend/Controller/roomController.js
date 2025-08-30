@@ -32,11 +32,55 @@ export const createRoom = async (req, res) => {
 
 //api to get all Rooms
 
-export const getRooms = async (req, res) => {};
+export const getRooms = async (req, res) => {
+  try {
+    const rooms = await Room.find({ isAvailable: true })
+      .populate({
+        path: "hotel",
+        populate: {
+          path: "owner",
+          select: "image",
+        },
+      })
+      .sort({ createdAt: -1 });
+    res.json({ success: true, rooms });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
 
 //api to get all room for a specific hotel
 
-export const getOwnerRooms = async (req, res) => {};
+export const getOwnerRooms = async (req, res) => {
+  try {
+    // hotel find karo jiska owner current user hai
+    const hotelData = await Hotel.findOne({ owner: req.auth.userId });
+
+    if (!hotelData) {
+      return res.json({
+        success: false,
+        message: "No hotel found for this owner",
+      });
+    }
+
+    // ab rooms find karo jo us hotel se belong karte hai
+    const rooms = await Room.find({ hotel: hotelData._id }).populate("hotel");
+
+    res.json({ success: true, rooms });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
 
 //api to toggle availablity of room
-export const toggleRoomAvailablity = async (req, res) => {};
+export const toggleRoomAvailablity = async (req, res) => {
+  try {
+    const { roomId } = req.body;
+    const roomData = await Room.findById(roomId);
+    roomData.isAvailable = !roomData.isAvailable;
+    await roomData.save();
+    res.json({ success: true, message: "room availablity upadated" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
