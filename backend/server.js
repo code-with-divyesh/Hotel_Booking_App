@@ -9,6 +9,7 @@ import { protect } from "./Middleware/authMiddleware.js";
 import hotelRouter from "./Routes/hotelRoute.js";
 import connectCloudinary from "./Config/cloudinary.js";
 import roomRouter from "./Routes/roomRouter.js";
+import bookingRouter from "./Routes/bookingRouter.js";
 
 connectDB();
 connectCloudinary();
@@ -37,6 +38,7 @@ app.post(
 app.use("/api/user", protect, userRouter);
 app.use("api/hotels", hotelRouter);
 app.use("api/rooms", roomRouter);
+app.use("api/bookings",bookingRouter);
 app.get("/", (req, res) => {
   res.send("API is Working");
 });
