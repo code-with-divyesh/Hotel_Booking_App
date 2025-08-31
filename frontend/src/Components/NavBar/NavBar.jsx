@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import "./NavBar.css";
-import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
+import { useClerk, UserButton } from "@clerk/clerk-react";
+import { useAppcontext } from "../../context/AppContext";
+
 const BookIcon = () => (
   <svg
     className="w-4 h-4 text-gray-700"
@@ -24,8 +26,10 @@ const NavBar = ({ onListYourHotelClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { openSignIn } = useClerk(); // 👈 corrected: openSignIn instead of openSignin
-  const { isSignedIn, user } = useUser(); // 👈 get auth state
-  const navigate = useNavigate();
+  // const { isSignedIn, user } = useUser(); // 👈 get auth state
+  // const navigate = useNavigate();
+
+  const { user, navigate, isOwner, setShowHotelReg } = useAppcontext();
   const location = useLocation();
 
   useEffect(() => {
@@ -52,36 +56,33 @@ const NavBar = ({ onListYourHotelClick }) => {
           <Link to="/rooms">Hotels</Link>
           <Link to="/">Experience</Link>
           <Link to="/">About</Link>
-          {!isSignedIn && <button className="dashboard-btn">Dashboard</button>}
-          {isSignedIn && (
+          {user && (
             <button
               className="dashboard-btn"
-              onClick={() => {
-                if (onListYourHotelClick) onListYourHotelClick();
-              }}
+              onClick={() =>
+                isOwner ? navigate("/owner") : setShowHotelReg(true)
+              }
             >
-              List Your Hotel
+              {isOwner ? `Dashboard` : `List Your Hotel`}
             </button>
           )}
         </div>
 
         <div className="nav-right">
           <img src={assets.searchIcon} alt="search" className="icon" />
-          {isSignedIn && (
+          {user && (
             <UserButton>
               <UserButton.MenuItems>
                 <UserButton.Action
                   label="My Bookings"
                   labelIcon={<BookIcon />}
-                  onClick={() => {
-                    "/my-Bookings";
-                  }}
+                  onClick={() => navigate("/my-Bookings")}
                 />
               </UserButton.MenuItems>
             </UserButton>
           )}
 
-          {!isSignedIn && (
+          {!user && (
             <button className="login-btn" onClick={() => openSignIn()}>
               Login
             </button>
@@ -89,7 +90,7 @@ const NavBar = ({ onListYourHotelClick }) => {
         </div>
 
         <div className="menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isSignedIn && (
+          {user && (
             <UserButton>
               <UserButton.MenuItems>
                 <UserButton.Action
@@ -123,31 +124,20 @@ const NavBar = ({ onListYourHotelClick }) => {
         <Link to="/" onClick={() => setIsMenuOpen(false)}>
           About
         </Link>
-        {isSignedIn && (
-          <button
-            className="dashboard-btn"
-            onClick={() => {
-              setIsMenuOpen(false);
-              navigate("/owner");
-            }}
-          >
-            Dashboard
-          </button>
-        )}
 
-        {!isSignedIn && (
+        {!user && (
           <button onClick={openSignIn} className="login-btn">
             Login
           </button>
         )}
-        {isSignedIn && (
+        {user && (
           <button
             className="dashboard-btn"
-            onClick={() => {
-              if (onListYourHotelClick) onListYourHotelClick();
-            }}
+            onClick={() =>
+              isOwner ? navigate("/owner") : setShowHotelReg(true)
+            }
           >
-            List Your Hotel
+            {isOwner ? `Dashboard` : `List Your Hotel`}
           </button>
         )}
       </div>
