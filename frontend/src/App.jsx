@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NavBar from "./Components/NavBar/NavBar";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./page/Home/Home";
@@ -11,34 +11,21 @@ import Layout from "./page/HotelOwner/Layout/Layout";
 import AddRoom from "./page/HotelOwner/AddRoom/AddRoom";
 import Dashboard from "./page/HotelOwner/Dashboard/Dashboard";
 import ListRoom from "./page/HotelOwner/ListRoom/ListRoom";
-
+import { Toaster } from "react-hot-toast";
+import { useAppcontext } from "./context/AppContext";
 const App = () => {
   const isOwnerpath = useLocation().pathname.includes("owner");
-
-  // State for showing HotelRegister on Home page
-  const [showHotelRegister, setShowHotelRegister] = useState(false);
+  const { showHotelReg } = useAppcontext();
 
   return (
     <div>
-      {!isOwnerpath && (
-        <NavBar
-          onListYourHotelClick={() => setShowHotelRegister(true)} // pass callback
-        />
-      )}
+      <Toaster />
+      {!isOwnerpath && <NavBar />}
+      {showHotelReg && <HotelRegister />}
 
       <div className="min-h-[70vh]">
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Home />
-                {showHotelRegister && (
-                  <HotelRegister onClose={() => setShowHotelRegister(false)} />
-                )}
-              </>
-            }
-          />
+          <Route path="/" element={<Home />} />
           <Route path="/rooms" element={<AllRooms />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/my-Bookings" element={<MyBookings />} />
