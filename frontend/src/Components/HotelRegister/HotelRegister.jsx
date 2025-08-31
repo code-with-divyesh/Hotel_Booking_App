@@ -1,7 +1,9 @@
 import React from "react";
 import { assets } from "../../assets/assets";
 import "./HotelRegister.css";
-const HotelRegister = ({ onClose }) => {
+import { useAppcontext } from "../../context/AppContext";
+const HotelRegister = () => {
+  const { setShowHotelReg } = useAppcontext();
   return (
     <div className="model-overlay">
       <div className="model-form">
@@ -11,7 +13,7 @@ const HotelRegister = ({ onClose }) => {
             src={assets.closeIcon}
             alt="close-icon"
             className="close-icon"
-            onClick={onClose}
+            onClick={() => setShowHotelReg(false)}
           />
           <p className="form-title">Register Your Hotel</p>
           <div class="form-group">
